@@ -171,6 +171,7 @@ public class CDRConvertingThread extends ProcessFileThread {
 		cdrInfo.setDataSource(CDRConst.DataSources.HUAWEI_MSC);
 		cdrInfo.setFileName(file.getName());
 		cdrInfo.setStatus(new Integer(CDRConst.Status.BEGIN));
+		cdrInfo.setFileSize(file.length());
 	}
 		
 	private String getCDRFileSeq(){
