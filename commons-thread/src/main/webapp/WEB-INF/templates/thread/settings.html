@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/init :: head">
+   		<title>Title List</title>    
+ 	</head>
+
+    <body>
+        <div id="wrapper">
+            <div id="nav_id" th:replace="nav :: nav">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <div class="navbar-default navbar-static-side" role="navigation">
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+            </div>
+			<div id="page-wrapper" style="min-height: 600px;">
+                <div class="row">
+                    
+					<div class ="panel panel-default">
+						<div class="panel-heading">Setting parameter for thread: <span th:text="${threadParams.name}"></span></div>
+						<div class="panel-body">
+                    		<form class="form-horizontal" role="form" th:action="@{/thread/edit_params}" th:object="${threadParams}"
+                    			method="POST">
+	                            <div class="row">
+	                        		<div class="col-md-8 col-md-offset-1">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Thread Name</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" th:field="*{id}" th:value="*{id}" hidden="true" />
+                                                <input type="text" th:field="*{className}" th:value="*{className}" hidden="true" />
+                                                <input type="text" th:field="*{autoStart}" th:value="*{autoStart}" hidden="true" />
+                                                <input type="text" th:field="*{schedule}" th:value="*{schedule}" hidden="true" />
+                                                <input type="text" th:field="*{threadGroup}" th:value="*{threadGroup}" hidden="true" />
+	                                            <input type="text" class="form-control" th:field="*{name}">
+                                            </div>
+                                        </div>
+									</div>
+	                        		
+	                        		<div class="col-md-8 col-md-offset-1">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Delay Time</label>
+                                            <div class="col-sm-8">
+	                                            <input type="text" class="form-control" th:field="*{delayTime}"></input>
+                                            </div>
+                                        </div>
+									</div>
+	                        		<div class="col-md-8 col-md-offset-1">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Parameters</label>
+                                            <div class="col-sm-8">
+	                                            <textarea rows="10" class="form-control" th:field="*{paramsAsString}"></textarea>
+                                            </div>
+                                        </div>
+									</div>
+                                     <div class="col-md-12">
+                                        <div class="form-group" style="margin-top: 20px;">
+                                        	<div class="col-sm-6">
+                                        		<a name="cancel" class="btn btn-danger pull-right" title="Trở về"
+                      								th:href="@{/thread/list.html}">Cancel</a>
+                                        	</div>
+                                        	<div class="col-sm-6">
+                                        		<button type="submit" class="btn btn-primary" title="Lưu batch">Save</button>
+                                        	</div>
+                                        </div>
+		                        	</div>								
+	                       		</div>
+	                        </form>
+						</div>
+					</div> <!-- End panel -->
+                </div>
+				
+			</div>
+        </div>
+        <!-- /#wrapper -->
+
+		<!--  <div th:replace="fragments/init :: commonScript"></div> -->
+		<!-- Core Scripts - Include with every page -->
+        <script src="../../resources/sb-admin-v2/js/jquery-1.10.2.js" th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/bootstrap.min.js" th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/bootstrap-switch.js" th:src="@{/resources/sb-admin-v2/js/bootstrap-switch.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+
+        <!-- Page-Level Plugin Scripts - Dashboard -->
+        <script src="../../resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+        <script src="../../resources/sb-admin-v2/js/plugins/morris/morris.js" th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+        <!-- Page-Level Plugin Scripts - Tables -->
+        <script src="../../resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js" th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+
+
+        <!-- SB Admin Scripts - Include with every page -->
+        <script src="../../resources/sb-admin-v2/js/sb-admin.js" th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+        	function updateStatus() {
+            	$('#btnRefresh')[0].click();
+        	}
+        	setInterval(updateStatus, 60000);
+        	//
+        	$("#switch-state").bootstrapSwitch();
+        </script>
+
+    </body>
+
+</html>

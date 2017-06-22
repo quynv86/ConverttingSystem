@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Webserver -->
+	<bean id="resourceBase" class="java.lang.String">
+		<constructor-arg value="./src/main/webapp" />
+	</bean>
+	<bean id="contextPath" class="java.lang.String">
+		<constructor-arg value="/bots" />
+	</bean>
+	 
+    <bean name="jettyWebServer" class="vn.yotel.commons.web.WebServer" destroy-method="stopServer">
+        <property name="port" value="8181" />
+    </bean>
+</beans>

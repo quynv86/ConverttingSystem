@@ -1,0 +1,351 @@
+CallEventRecord	(0)     CHOICE
+(
+    moCallRecord	        	(0)	MoCallRecord,
+    mtCallRecord                (1)     MtCallRecord,
+    roamingRecord               (2)     RoamingRecord,
+    incGatewayRecord            (3)     IncGatewayRecord,
+    outGatewayRecord            (4)     OutGatewayRecord,
+    transitCallRecord           (5)     TransitCallRecord,
+    moSMSRecord                 (6)     MOSMSRecord,
+    mtSMSRecord                 (7)     MTSMSRecord,
+    forwardCallRecord           (100)   MoCallRecord
+)
+MoCallRecord	        SET
+(
+    recordType		        	(0)     INTEGER,
+    servedIMSI                  (1)     TBCD_STRING,
+    servedIMEI                  (2)     TBCD_STRING,
+    servedMSISDN                (3)     TBCD_STRING,
+    callingNumber               (4)     TBCD_STRING,
+    calledNumber                (5)     TBCD_STRING,
+    translatedNumber            (6)     TBCD_STRING,
+    connectedNumber             (7)     TBCD_STRING,
+    roamingNumber               (8)     TBCD_STRING,
+    recordingEntity             (9)     TBCD_STRING,
+    mscIncomingROUTE            (10)    MscIncomingROUTE,
+    mscOutgoingROUTE            (11)    MscOutgoingROUTE,
+    location                    (12)    LocationAreaAndCell,
+    basicService                (14)    BasicService,
+    supplServicesUsed           (17)    SEQUENCE_OF     SuppServiceUsed,
+    msClassmark                 (20)    OCTET_STRING,
+    answerTime                  (23)    OCTET_STRING,
+    releaseTime                 (24)    OCTET_STRING,
+    callDuration                (25)    INTEGER,
+    causeForTerm                (30)    INTEGER,
+    diagnostics                 (31)    Diagnostics,
+    callReference               (32)    OCTET_STRING,
+    sequenceNumber              (33)    INTEGER,
+    additionalChgInfo           (34)    AdditionalChgInfo,
+    serviceKey			(37)    INTEGER,
+    networkCallReference        (38)    OCTET_STRING,
+    mscAddress                  (39)    TBCD_STRING,
+    cAMELCallLegInformation     (54)    SEQUENCE_OF     CAMELInformation,
+    systemType                  (61)    INTEGER,
+    chargedParty                (141)   INTEGER,
+    orgRNCorBSCId               (167)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+    globalAreaID                (188)   CELL_ID,
+    subscriberCategory          (190)   OCTET_STRING,
+    firstmccmnc                 (192)   OCTET_STRING,
+    lastmccmnc                  (194)   OCTET_STRING,
+    recordNumber                (232)   INTEGER,
+    mscOutgoingROUTENumber      (261)   INTEGER,
+    mscIncomingROUTENumber      (262)   INTEGER,
+    globalCallReference         (290)   OCTET_STRING
+)
+MtCallRecord            SET
+(
+    recordType		        	(0)     INTEGER,
+    servedIMSI                  (1)     TBCD_STRING,
+    servedIMEI                  (2)     TBCD_STRING,
+    servedMSISDN                (3)     TBCD_STRING,
+    callingNumber               (4)     TBCD_STRING,
+    connectedNumber             (5)     TBCD_STRING,
+    roamingNumber               (160)   TBCD_STRING,
+    recordingEntity             (6)     TBCD_STRING,
+    mscIncomingROUTE            (7)     MscIncomingROUTE,
+    mscOutgoingROUTE            (8)     MscOutgoingROUTE,
+    location                    (9)     LocationAreaAndCell,
+    basicService                (11)    BasicService,
+    supplServicesUsed           (14)    SEQUENCE_OF     SuppServiceUsed,
+    msClassmark                 (17)    OCTET_STRING,
+    answerTime                  (20)    OCTET_STRING,
+    releaseTime                 (21)    OCTET_STRING,
+    callDuration                (22)    INTEGER,
+    causeForTerm                (27)    INTEGER,
+    diagnostics                 (28)    Diagnostics,
+    callReference               (29)    OCTET_STRING,
+    sequenceNumber              (30)    INTEGER,
+    additionalChgInfo           (31)    AdditionalChgInfo,
+    networkCallReference        (33)    OCTET_STRING,
+    mscAddress                  (34)    TBCD_STRING,
+    serviceKey			(45)    INTEGER,
+    systemType                  (46)    INTEGER,
+    chargedParty                (141)   INTEGER,
+    originalCalledNumber        (142)   TBCD_STRING,
+    orgRNCorBSCId               (167)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+    globalAreaID                (188)   CELL_ID,
+    subscriberCategory          (190)   OCTET_STRING,
+    firstmccmnc                 (192)   OCTET_STRING,
+    lastmccmnc                  (194)   OCTET_STRING,
+    redirectingnumber           (201)   TBCD_STRING,
+    calledNumber                (205)   TBCD_STRING,
+    recordNumber                (232)   INTEGER,
+    translatedNumber            (245)   TBCD_STRING,
+    mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
+    mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
+    globalCallReference         (290)   OCTET_STRING
+)
+RoamingRecord           SET
+(
+    recordType		        	(0)     INTEGER,
+    servedIMSI                  (1)     TBCD_STRING,
+    servedMSISDN                (2)     TBCD_STRING,
+    callingNumber               (3)     TBCD_STRING,
+    roamingNumber               (4)     TBCD_STRING,
+    recordingEntity             (5)     TBCD_STRING,
+    mscIncomingROUTE            (6)     MscIncomingROUTE,
+    mscOutgoingROUTE            (7)     MscOutgoingROUTE,
+    basicService                (8)     BasicService,
+    answerTime                  (13)    OCTET_STRING,
+    releaseTime                 (14)    OCTET_STRING,
+    callDuration                (15)    INTEGER,
+    causeForTerm                (17)    INTEGER,
+    diagnostics                 (18)    Diagnostics,
+    callReference               (19)    OCTET_STRING,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    networkCallReference        (22)    OCTET_STRING,
+    mscAddress                  (23)    TBCD_STRING,
+    chargedParty                (141)   INTEGER,
+    orgMSCId                    (168)   OCTET_STRING,
+    subscriberCategory          (190)   OCTET_STRING,
+    serviceKey                  (217)   INTEGER,
+    recordNumber                (232)   INTEGER,
+    translatedNumber            (245)   TBCD_STRING,
+    mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
+    mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
+    globalCallReference         (290)   OCTET_STRING
+)
+TransitCallRecord       SET
+(
+    recordType		        	(0)     INTEGER,
+    callingNumber               (4)     TBCD_STRING,
+    calledNumber                (5)     TBCD_STRING,
+    recordingEntity             (1)     TBCD_STRING,
+    mscIncomingROUTE            (2)     MscIncomingROUTE,
+    mscOutgoingROUTE            (3)     MscOutgoingROUTE,
+    basicService                (130)   BasicService,
+    answerTime                  (8)     OCTET_STRING,
+    releaseTime                 (9)     OCTET_STRING,
+    callDuration                (10)    INTEGER,
+    causeForTerm                (12)    INTEGER,
+    diagnostics                 (13)    Diagnostics,
+    callReference               (14)    OCTET_STRING,
+    sequenceNumber              (15)    INTEGER,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    networkCallReference        (200)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    translatedNumber            (245)   TBCD_STRING,
+    mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
+    mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
+    globalCallReference         (290)   OCTET_STRING
+)
+IncGatewayRecord        SET
+(
+    recordType		        	(0)     INTEGER,
+    callingNumber               (1)     TBCD_STRING,
+    calledNumber                (2)     TBCD_STRING,
+    roamingNumber               (160)   TBCD_STRING,
+    recordingEntity             (3)     TBCD_STRING,
+    mscIncomingROUTE            (4)     MscIncomingROUTE,
+    mscOutgoingROUTE            (5)     MscOutgoingROUTE,
+    basicService                (130)   BasicService,
+    answerTime                  (7)     OCTET_STRING,
+    releaseTime                 (8)     OCTET_STRING,
+    callDuration                (9)     INTEGER,
+    causeForTerm                (11)    INTEGER,
+    diagnostics                 (12)    Diagnostics,
+    callReference               (13)    OCTET_STRING,
+    sequenceNumber              (14)    INTEGER,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    networkCallReference        (200)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    translatedNumber            (245)   TBCD_STRING,
+    location                    (247)   LocationAreaAndCell,
+    mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
+    mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
+    globalCallReference         (290)   OCTET_STRING
+)
+OutGatewayRecord        SET
+(
+    recordType		        	(0)     INTEGER,
+    callingNumber               (1)     TBCD_STRING,
+    calledNumber                (2)     TBCD_STRING,
+    roamingNumber               (160)   TBCD_STRING,
+    recordingEntity             (3)     TBCD_STRING,
+    mscIncomingROUTE            (4)     MscIncomingROUTE,
+    mscOutgoingROUTE            (5)     MscOutgoingROUTE,
+    answerTime                  (7)     OCTET_STRING,
+    releaseTime                 (8)     OCTET_STRING,
+    callDuration                (9)     INTEGER,
+    causeForTerm                (11)    INTEGER,
+    diagnostics                 (12)    Diagnostics,
+    callReference               (13)    OCTET_STRING,
+    basicService                (130)   BasicService,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    networkCallReference        (200)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    firstmccmnc                 (249)   OCTET_STRING,
+    lastmccmnc                  (250)   OCTET_STRING,
+    translatedNumber            (245)   TBCD_STRING,
+    location                    (247)   LocationAreaAndCell,
+    mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
+    mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
+    globalCallReference         (290)   OCTET_STRING
+)
+ForwardCallRecord   SET
+(
+    recordType		        	(0)     INTEGER,
+    servedIMSI                  (1)     TBCD_STRING,
+    servedIMEI                  (2)     TBCD_STRING,
+    servedMSISDN                (3)     TBCD_STRING,
+    callingNumber               (4)     TBCD_STRING,
+    calledNumber                (5)     TBCD_STRING,
+    translatedNumber            (6)     TBCD_STRING,
+    roamingNumber               (8)     TBCD_STRING,
+    recordingEntity             (9)     TBCD_STRING,
+    mscIncomingROUTE            (10)    MscIncomingROUTE,
+    mscOutgoingROUTE            (11)    MscOutgoingROUTE,
+    location                    (12)    LocationAreaAndCell,
+    basicService                (14)    BasicService,
+    msClassmark                 (20)    OCTET_STRING,
+    answerTime                  (23)    OCTET_STRING,
+    releaseTime                 (24)    OCTET_STRING,
+    callDuration                (25)    INTEGER,
+    causeForTerm                (30)    INTEGER,
+    diagnostics                 (31)    Diagnostics,
+    callReference               (32)    OCTET_STRING,
+    sequenceNumber              (33)    INTEGER,
+    additionalChgInfo           (34)    AdditionalChgInfo,
+    networkCallReference        (38)    OCTET_STRING,
+    mscAddress                  (39)    TBCD_STRING,
+    systemType                  (61)    INTEGER,
+    chargedParty                (141)   INTEGER,
+    orgRNCorBSCId               (167)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+    globalAreaID                (188)   CELL_ID,
+    subscriberCategory          (190)   OCTET_STRING,
+    firstmccmnc                 (192)   OCTET_STRING,
+    lastmccmnc                  (194)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    mscOutgoingROUTENumber      (261)   INTEGER,
+    mscIncomingROUTENumber      (262)   INTEGER,
+    globalCallReference         (290)   OCTET_STRING
+)
+MOSMSRecord             SET
+(
+    recordType		        	(0)     INTEGER,
+    servedIMSI                  (1)     TBCD_STRING,
+    servedIMEI                  (2)     TBCD_STRING,
+    servedMSISDN                (3)     TBCD_STRING,
+    msClassmark                 (4)     OCTET_STRING,
+    serviceCentre               (5)     TBCD_STRING,
+    recordingEntity             (6)     TBCD_STRING,
+    location                    (7)     LocationAreaAndCell,
+    messageReference            (8)     OCTET_STRING,
+    originationTime             (9)     OCTET_STRING,
+    destinationNumber           (12)    TBCD_STRING,
+    systemType                  (14)    INTEGER,
+    basicService                (130)   BasicService,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    chargedParty                (141)   INTEGER,
+    orgRNCorBSCId               (167)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+    globalAreaID                (188)   CELL_ID,
+    subscriberCategory          (190)   OCTET_STRING,
+    firstmccmnc                 (192)   OCTET_STRING,
+    smsUserDataType             (195)   OCTET_STRING,
+    smsText                     (196)    OCTET_STRING,
+    callReference               (201)    OCTET_STRING,
+	recordNumber                (232)   INTEGER
+)
+MTSMSRecord              SET
+(
+    recordType		        	(0)     INTEGER,
+    serviceCentre               (1)     TBCD_STRING,
+    servedIMSI                  (2)     TBCD_STRING,
+    servedIMEI                  (3)     TBCD_STRING,
+    servedMSISDN                (4)     TBCD_STRING,
+    msClassmark                 (5)     OCTET_STRING,
+    recordingEntity             (6)     TBCD_STRING,
+    location                    (7)     LocationAreaAndCell,
+    deliveryTime                (8)     OCTET_STRING,
+    systemType                  (11)    INTEGER,
+    basicService                (130)   BasicService,
+    additionalChgInfo           (133)   AdditionalChgInfo,
+    chargedParty                (141)   INTEGER,
+    orgRNCorBSCId               (167)   OCTET_STRING,
+    orgMSCId                    (168)   OCTET_STRING,
+    globalAreaID                (188)   CELL_ID,
+    subscriberCategory          (190)   OCTET_STRING,
+    firstmccmnc                 (192)   OCTET_STRING,
+    smsUserDataType             (195)   OCTET_STRING,
+    smsText                     (196)   OCTET_STRING,
+    origination                 (201)   TBCD_STRING,
+    callReference               (202)   OCTET_STRING,
+	recordNumber                (232)   INTEGER
+)
+MscIncomingROUTE        SET
+(
+    mscIncoming                 (1)     IA5STRING
+)
+MscOutgoingROUTE        SET
+(
+    mscOutgoing                 (1)     IA5String
+)
+Location    SET
+(
+    loca                        (0)     OCTET_STRING,
+    changeOfLocation            (1)     OCTET_STRING
+)
+LocationAreaAndCell    SET
+(
+    locationAreaCode            (0)     OCTET_STRING
+)
+BasicService            SET
+(
+    bsService                   (3)     OCTET_STRING
+)
+Diagnostics CHOICE
+(
+    gsm0408Cause                   (0)     INTEGER,
+    gsm0902MapErrorValue                   (1)     INTEGER,
+    ccittQ767Cause                   (2)     INTEGER,
+    networkSpecificCause                   (3)     SET_OF	ManagementExtension,
+    manufacturerSpecificCause                   (4)     SET_OF	ManagementExtension
+)
+
+AdditionalChgInfo       SET
+(
+   AddChargeInfo                (0)     INTEGER
+)
+CAMELInformation        SET
+(
+   cAMELDestinationNumber       (1)     TBCD_STRING
+)
+SuppServiceUsed         SEQUENCE
+(
+    ssCode                      (0)     OCTET_STRING,
+    ssTime                      (1)     OCTET_STRING,
+    relatedNumber               (2)     TBCD_STRING
+)
+ManagementExtension             SEQUENCE
+(
+	identifier              (0)     OBJECT_IDENTIFIER,
+	information             (2)     OCTET_STRING
+)
+
