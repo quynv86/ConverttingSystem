@@ -47,7 +47,7 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <table width="100%" class="table table-striped table-bordered table-hover" id="log-detail-table">
                                         <thead>
                                             <tr>
                                                 <th>LEVEL</th>
@@ -104,12 +104,21 @@
 
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
-        	function updateStatus() {
-            	$('#btnRefresh')[0].click();
-        	}
-        	setInterval(updateStatus, 30000);
-        	//
-        	$("#switch-state").bootstrapSwitch();
+
+            $(document).ready(function() {
+                $('#log-detail-table').DataTable({
+                    responsive: true
+                });
+                
+            	function updateStatus() {
+                	$('#btnRefresh')[0].click();
+            	}
+            	
+            	setInterval(updateStatus, 30000);
+            	//
+            	$("#switch-state").bootstrapSwitch();
+            	
+            });
         </script>
 
     </body>
