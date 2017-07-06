@@ -8,12 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="THREADS_LOG")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+	name = "loadLogByThread",
+	query = "select * from THREADS_LOG t where t.thread_id=:thread_id and log_date >= sysdate -30 and rownum <2000 order by log_date desc",
+        resultClass = ThreadLog.class)	
+})
 public class ThreadLog implements Serializable {
 
 	private static final long serialVersionUID = 1L;
