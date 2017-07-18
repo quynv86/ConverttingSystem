@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 	name = "loadLogByThread",
-	query = "select * from THREADS_LOG t where t.thread_id=:thread_id and log_date >= sysdate -30 and rownum <2000 order by log_date desc",
+	query = "select top 500 t.* from THREADS_LOG t where t.thread_id=:thread_id order by log_date desc",
         resultClass = ThreadLog.class)	
 })
 public class ThreadLog implements Serializable {

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -33,9 +32,9 @@ public class ThreadConfig implements Serializable {
 	
     @Id
     @Column(name = "thread_id")
-    @SequenceGenerator(allocationSize = 1, name = "ThreadConfigsGen", initialValue = 1, sequenceName = "threads_config_seq")
-    @GeneratedValue(generator = "ThreadConfigsGen", strategy = GenerationType.SEQUENCE)
-	
+//    @SequenceGenerator(allocationSize = 1, name = "ThreadConfigsGen", initialValue = 1, sequenceName = "threads_config_seq")
+//    @GeneratedValue(generator = "ThreadConfigsGen", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)	
 	public String getId() {
 		return id;
 	}

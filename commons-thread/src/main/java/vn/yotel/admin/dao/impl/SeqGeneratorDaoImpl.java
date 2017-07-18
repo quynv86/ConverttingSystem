@@ -22,7 +22,9 @@ public class SeqGeneratorDaoImpl implements SeqGeneratorDao {
 	
 	@Override
 	public String nextVal(String seqName) {
-		String SQL = String.format("select %s.nextval from dual", seqName);
+//		if(1==1) {return "1";}
+//		String SQL = String.format("select %s.nextval from dual", seqName);
+		String SQL = String.format("select next value for %s", seqName);
 		Connection conn =null;
 		PreparedStatement stmt =null;
 		ResultSet res = null;

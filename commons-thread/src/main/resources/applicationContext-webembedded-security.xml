@@ -23,7 +23,7 @@
 			authentication-failure-url="/login.html?error=true"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
 		<access-denied-handler error-page="/403-auth.html" />
-		<logout />
+		<logout logout-url="/j_spring_security_logout" />
 		<csrf disabled="true"/>
 	</http>
 

@@ -24,8 +24,8 @@ public class DBLogger implements ThreadLogger {
 	DataSource dataSource;
 	@Override
 	public void log(ManageableThread thread, int level, String message) {
-		String SQL = "insert into threads_log(log_id,thread_id,log_level,log_date,log_content) "
-				+" values(threads_log_seq.nextval, ?, ?, sysdate,?)";
+		String SQL = "insert into threads_log(thread_id,log_level,log_date,log_content) "
+				+" values(?, ?, current_timestamp,?)";
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try{

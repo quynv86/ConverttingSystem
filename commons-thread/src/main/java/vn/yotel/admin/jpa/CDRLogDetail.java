@@ -30,8 +30,9 @@ public class CDRLogDetail implements Serializable {
 	
 	@Id
     @Column(name = "ID")
-    @SequenceGenerator(allocationSize = 1, name = "CDRDetailSeqGen", initialValue = 1, sequenceName = "cdr_file_detail_seq")
-    @GeneratedValue(generator = "CDRDetailSeqGen", strategy = GenerationType.SEQUENCE)
+//    @SequenceGenerator(allocationSize = 1, name = "CDRDetailSeqGen", initialValue = 1, sequenceName = "cdr_file_detail_seq")
+//    @GeneratedValue(generator = "CDRDetailSeqGen", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -57,7 +58,7 @@ public class CDRLogDetail implements Serializable {
 		this.fileDate = fileDate;
 	}
 	
-	@Column(name="KEY")
+	@Column(name="V_KEY")
 	public String getKey() {
 		return key;
 	}

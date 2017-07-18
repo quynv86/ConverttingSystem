@@ -28,8 +28,9 @@ public class CDRLog implements Serializable {
 	private Long logId;
 	@Id
 	@Column(name="CDR_FILE_ID")
-	@SequenceGenerator(name="CDR_LOG_SEQ_GEN", sequenceName="CDR_LOG_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CDR_LOG_SEQ_GEN")
+//	@SequenceGenerator(name="CDR_LOG_SEQ_GEN", sequenceName="CDR_LOG_SEQ")
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CDR_LOG_SEQ_GEN")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getLogId() {
 		return logId;
 	}
