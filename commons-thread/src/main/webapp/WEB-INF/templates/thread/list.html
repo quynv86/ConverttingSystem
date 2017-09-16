@@ -53,9 +53,9 @@
                                                 <th>No</th>
                                                 <th>Thread Name</th>
                                                 <th>State</th>
-                                                <th>Info</th>
                                                 <th>Action</th>
                                                 <th>Settings</th>
+                                                <th>Header Settings</th>
                                                 <th>View Log</th>
                                             </tr>
                                         </thead>
@@ -71,20 +71,15 @@
                                                 	<span class="btn btn-success" th:if="${oneThread.status} == true" th:text="Running">Running</span>
                                                 	<span class="btn btn-warning" th:if="${oneThread.status} == false" th:text="Stopped">Stopped</span>
                                                 </td>
-                                                <td th:switch="${#strings.toString(oneThread.state)}">
-                                                	<span th:case="0" class="btn btn-info">Normal</span>
-                                                	<span th:case="1" class="btn btn-info">Info</span>
-                                                	<span th:case="2" class="btn btn-warning">Warn</span>
-                                                	<span th:case="3" class="btn btn-danger">Error</span>
-                                                	<span th:case="4" class="btn btn-success">Idle</span>
-                                                </td>
-
                                                 <td>
                                                     <a type="button" class="btn btn-danger" th:if="${oneThread.status} == true" href="#" th:href="@{/thread/{id}/stop.html(id=${oneThread.id})}"><i class="fa fa-power-off"></i> Stop</a>
                                                    	<a type="button" class="btn btn-primary" th:if="${oneThread.status} == false" href="#" th:href="@{/thread/{id}/start.html(id=${oneThread.id})}"><i class="fa fa-power-off"></i> Start</a>
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn btn-primary" th:href="@{/thread/{id}/settings.html(id=${oneThread.id})}"><i class="fa fa-cog"></i> Settings</a>
+                                                </td>
+                                                <td>
+                                                    <a type="button" class="btn btn-primary" th:href="@{/header-settings/{id}/view(id=${oneThread.id})}"><i class="fa fa-cog"></i> Header Settings</a>
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn btn-primary" th:href="@{/thread/{id}/viewlog.html(id=${oneThread.id})}"><i class="fa fa-apple"></i> View Log</a>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/init :: head">
+<title>Title List</title>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="nav_id" th:replace="nav :: nav">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+				style="margin-bottom: 0">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".sidebar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+				</div>
+				<!-- /.navbar-header -->
+
+				<ul class="nav navbar-top-links navbar-right">
+				</ul>
+				<!-- /.navbar-top-links -->
+
+				<div class="navbar-default navbar-static-side" role="navigation">
+				</div>
+				<!-- /.navbar-static-side -->
+			</nav>
+		</div>
+		<div id="page-wrapper" style="min-height: 600px;">
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>Setting header</h2>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form" th:action="@{/header-settings/update}" th:object="${headerConfig}"
+                    			method="POST">
+							<div class="row">
+								<input type="text" th:field="*{id}" th:value="*{id}" hidden="true" />
+								<div class="col-lg-6">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-lg-6"><h3>Avaiable columns</h3></div>
+											<div class="col-lg-6"><button class="btn btn-success btn-all-all">Add >></button></div>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th>No</th>
+														<th>Column Name</th>
+														<th>Chose</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="oneItem, iterStat : ${headerConfig.avaibleColumns}">
+														<td>
+															<p th:text="${iterStat.count}">1</p>
+														<td>
+															<p th:text="${oneItem.columnName}">Name</p>
+														</td>
+														<td>
+															<input type="checkbox" th:value="${oneItem.id}" th:field=*{selectedAdd}></input>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-lg-6"><button class="btn btn-success" ><< Remove</button></div>
+											<div class="col-lg-6"><h3>Selected Columns</h3></div>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th>No</th>
+														<th>Column Name</th>
+														<th>Chose</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="oneItem, iterStat : ${headerConfig.exportColumns}">
+														<td>
+															<p th:text="${iterStat.count}">1</p>
+														<td>
+															<p th:text="${oneItem.columnName}">Name</p>
+														</td>
+														<td>
+															<input type="checkbox" th:value="${oneItem.id}"  th:field=*{selectedRemove}></input>
+														</td>
+													</tr>
+													
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+							</div>	
+								<!-- End class="row" -->
+						</form>
+					</div>
+				</div>
+				<!-- End panel -->
+			</div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!--  <div th:replace="fragments/init :: commonScript"></div> -->
+	<!-- Core Scripts - Include with every page -->
+	<script src="../../resources/sb-admin-v2/js/jquery-1.10.2.js"
+		th:src="@{/resources/sb-admin-v2/js/jquery-1.10.2.js}"></script>
+	<script src="../../resources/sb-admin-v2/js/bootstrap.min.js"
+		th:src="@{/resources/sb-admin-v2/js/bootstrap.min.js}"></script>
+	<script src="../../resources/sb-admin-v2/js/bootstrap-switch.js"
+		th:src="@{/resources/sb-admin-v2/js/bootstrap-switch.js}"></script>
+	<script
+		src="../../resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js"
+		th:src="@{/resources/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+
+	<!-- Page-Level Plugin Scripts - Dashboard -->
+	<script
+		src="../../resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js"
+		th:src="@{/resources/sb-admin-v2/js/plugins/morris/raphael-2.1.0.min.js}"></script>
+	<script src="../../resources/sb-admin-v2/js/plugins/morris/morris.js"
+		th:src="@{/resources/sb-admin-v2/js/plugins/morris/morris.js}"></script>
+	<!-- Page-Level Plugin Scripts - Tables -->
+	<script
+		src="../../resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js"
+		th:src="@{/resources/sb-admin-v2/js/plugins/dataTables/jquery.dataTables.js}"></script>
+	<!-- SB Admin Scripts - Include with every page -->
+	<script src="../../resources/sb-admin-v2/js/sb-admin.js"
+		th:src="@{/resources/sb-admin-v2/js/sb-admin.js}"></script>
+	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+	<script>
+		
+		var choosedItems = new Array();
+		function onChecked(input, callObj){
+			console.log('Click me!!!' +input);
+			console.log(callObj);
+			if(callObj.checked==true){
+				//console.log('Chose: ' +input);
+				choosedItems.push(input);
+			}else{
+				//choosedItems.splice(choosedItems.indexOf(input));
+				console.log('Remove: ' +input);
+			}
+			console.log('After click: ' + choosedItems.join(','));
+		}
+		function onSubmit(callObj){
+			//console.log('Call submit form!!');
+			console.log('Add following columns to list: ' + choosedItems.join(','));
+			$.ajax({
+				type:"POST",
+				contentType : "application/json",
+				url : "${home}search/api/getSearchResult",
+			});
+		}
+	</script>
+
+</body>
+</html>
