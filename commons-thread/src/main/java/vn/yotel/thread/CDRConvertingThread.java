@@ -1,14 +1,19 @@
 package vn.yotel.thread;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
 
+import vn.yotel.admin.bo.HeaderConfigBo;
 import vn.yotel.admin.bo.SeqGeneratorBo;
+import vn.yotel.admin.jpa.CDRColumn;
 import vn.yotel.admin.jpa.CDRLog;
+import vn.yotel.admin.jpa.HeaderConfig;
 import vn.yotel.cdr.CDRConst;
 import vn.yotel.cdr.format.HuaweiFormat;
 import vn.yotel.commons.exception.AppException;
@@ -44,6 +49,8 @@ public class CDRConvertingThread extends ProcessFileThread {
 	
 	private Matcher mMatcher;
 	
+	private HeaderConfigBo headerConf;
+	
 	private boolean logAvaiable(){
 		return logIsActive;
 	}
@@ -66,9 +73,43 @@ public class CDRConvertingThread extends ProcessFileThread {
 		formater.mstrFileNameFormat = this.localFileFormat;
 		formater.p_mstrHeader = this.outputHeader;
 		formater.p_LocDir = this.exportDir;
-		formater.p_mstrHeader = this.outputHeader;
-	}
+//		formater.p_mstrHeader = this.outputHeader;
+		// Build export header
+		String exportHeader ="";
+		HeaderConfig conf = headerConf.findByThread(Integer.valueOf(this.getId()));
+		List<CDRColumn> exports = conf.getExportColumns();
+		boolean isFirst = true;
+		if(exports==null){
+			throw new Exception("No column to export!!");
+		}
+		for(CDRColumn col: exports){
+			if(isFirst){
+				exportHeader +=col.getColumnName();
+				isFirst = false;
+			}else{
+				exportHeader +=";"+col.getColumnName() ;
+			}
+		}
 
+		formater.setExportHeader(exportHeader);
+		formater.p_mstrHeader = exportHeader;
+		// Build fixed header
+		String fixedHeader = "";
+		List<CDRColumn> fixes = conf.getFixedColumns();
+		isFirst = true;
+		if(fixes==null){
+			throw new Exception("No column to found!!");
+		}
+		for(CDRColumn col: fixes){
+			if(isFirst){
+				fixedHeader +=col.getColumnName();
+				isFirst = false;
+			}else{
+				fixedHeader +=";"+col.getColumnName();
+			}
+		}
+		formater.setFixedHeader(fixedHeader);
+	}
 	@Override
 	protected void afterProcessFileList() throws Exception {
 		// TODO Auto-generated method stub
@@ -92,6 +133,7 @@ public class CDRConvertingThread extends ProcessFileThread {
 		}else{
 			logIsActive = false;
 		}
+		headerConf = (HeaderConfigBo)this.getBean("headerConfigBoImpl");
 	}
 	
 	@Override

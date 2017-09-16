@@ -34,6 +34,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 				<value>vn.yotel.admin.jpa.ThreadLog</value>
 				<value>vn.yotel.admin.jpa.CDRLog</value>
 				<value>vn.yotel.admin.jpa.CDRLogDetail</value>
+				<value>vn.yotel.admin.jpa.HeaderConfig</value>
+				<value>vn.yotel.admin.jpa.CDRColumn</value>
 			</list>
 		</property>
 	</bean>

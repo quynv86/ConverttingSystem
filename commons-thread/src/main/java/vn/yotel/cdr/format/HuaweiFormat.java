@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import vn.yotel.cdr.asn1.ASNCursor;
@@ -83,6 +84,15 @@ public class HuaweiFormat extends ASNFormat
 	public int miReduceHeader = 0;
 
 	private String mstrSourceFile = "";
+	
+	private String fixedHeader;
+	private String exportHeader;
+	private String[] fixedHeaderAsArr=new String[100];
+	private String[] exportHeaderAsArr = new String[100];
+	
+
+	private HashMap<String,String> record;
+
 
 	class HuaweiCursor extends ASNCursor
 	{
@@ -158,12 +168,16 @@ public class HuaweiFormat extends ASNFormat
 			// Called number
 			mstrFieldList[mintIndexCalledNumber] = CDRBinUtil.formatCalledNumber(mstrFieldList[mintIndexCalledNumber].trim());
 
-			// Write to string
-			String strValue = "";
-			for (int i = 0; i < mstrFieldList.length; i++)
-			{
-				strValue += mstrFieldList[i] + ";";
+			HashMap<String,String> onRec = new HashMap<String, String>();
+			for(int i=0;i<mstrFieldList.length;i++){
+				onRec.put(fixedHeaderAsArr[i], mstrFieldList[i]);
 			}
+
+			String strValue = "";
+			for(int i=0; i<exportHeaderAsArr.length; i++){
+				strValue += onRec.get(exportHeaderAsArr[i]) +";";
+			}
+
 			// Write to file
 			try
 			{
@@ -725,6 +739,14 @@ public class HuaweiFormat extends ASNFormat
 	public int convert(File inputFile,
 		ManageableThread parentThread) throws Exception
 	{
+		/*Parse san cac truong*/
+		if(this.fixedHeader!=null){
+			fixedHeaderAsArr = fixedHeader.split(";");
+		}
+		if(this.exportHeader!=null){
+			exportHeaderAsArr = exportHeader.split(";");
+		}
+
 		String strFileFormat = "";
 		try
 		{
@@ -1109,4 +1131,22 @@ public class HuaweiFormat extends ASNFormat
 	private String fileId;
 	public String getFileId(){return fileId;};
 	public void setFileId(String fileId){this.fileId = fileId;}
+
+	public String getFixedHeader() {
+		return fixedHeader;
+	}
+
+	public void setFixedHeader(String fixedHeader) {
+		this.fixedHeader = fixedHeader;
+	}
+
+	public String getExportHeader() {
+		return exportHeader;
+	}
+
+	public void setExportHeader(String exportHeader) {
+		this.exportHeader = exportHeader;
+	}
+	
+	
 }
