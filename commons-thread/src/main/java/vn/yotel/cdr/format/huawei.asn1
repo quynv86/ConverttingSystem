@@ -36,11 +36,13 @@ MoCallRecord	        SET
     callReference               (32)    OCTET_STRING,
     sequenceNumber              (33)    INTEGER,
     additionalChgInfo           (34)    AdditionalChgInfo,
+    recordExtensions           	(35)    SET_OF     ManagementExtension,
     serviceKey			(37)    INTEGER,
     networkCallReference        (38)    OCTET_STRING,
     mscAddress                  (39)    TBCD_STRING,
     cAMELCallLegInformation     (54)    SEQUENCE_OF     CAMELInformation,
     systemType                  (61)    INTEGER,
+    partialRecordType			(69)    PartialRecordType,	
     chargedParty                (141)   INTEGER,
     orgRNCorBSCId               (167)   OCTET_STRING,
     orgMSCId                    (168)   OCTET_STRING,
@@ -48,10 +50,17 @@ MoCallRecord	        SET
     subscriberCategory          (190)   OCTET_STRING,
     firstmccmnc                 (192)   OCTET_STRING,
     lastmccmnc                  (194)   OCTET_STRING,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
+    setupTime                   (201)   OCTET_STRING,
+    alertingTime                (202)   OCTET_STRING,
+    voiceIndicator              (203)   VoiceIndicator,
+    networkOperatorId           (223)   OCTET_STRING,
     recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel,
     mscOutgoingROUTENumber      (261)   INTEGER,
     mscIncomingROUTENumber      (262)   INTEGER,
-    globalCallReference         (290)   OCTET_STRING
+    globalCallReference         (290)   OCTET_STRING,
+    callerIPInformation         (291)   IPInformationEvent 
 )
 MtCallRecord            SET
 (
@@ -77,10 +86,12 @@ MtCallRecord            SET
     callReference               (29)    OCTET_STRING,
     sequenceNumber              (30)    INTEGER,
     additionalChgInfo           (31)    AdditionalChgInfo,
+    recordExtensions           	(32)    SET_OF ManagementExtension,
     networkCallReference        (33)    OCTET_STRING,
     mscAddress                  (34)    TBCD_STRING,
     serviceKey			(45)    INTEGER,
     systemType                  (46)    INTEGER,
+    partialRecordType			(54)    PartialRecordType,
     chargedParty                (141)   INTEGER,
     originalCalledNumber        (142)   TBCD_STRING,
     orgRNCorBSCId               (167)   OCTET_STRING,
@@ -89,13 +100,20 @@ MtCallRecord            SET
     subscriberCategory          (190)   OCTET_STRING,
     firstmccmnc                 (192)   OCTET_STRING,
     lastmccmnc                  (194)   OCTET_STRING,
-    redirectingnumber           (201)   TBCD_STRING,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
+    redirectingnumber           (203)   TBCD_STRING,
+    setupTime                   (204)   OCTET_STRING,
+    alertingTime                (202)   OCTET_STRING,
     calledNumber                (205)   TBCD_STRING,
+    voiceIndicator              (206)   VoiceIndicator,
+    networkOperatorId           (223)   OCTET_STRING,
     recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel,
     translatedNumber            (245)   TBCD_STRING,
     mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
-    globalCallReference         (290)   OCTET_STRING
+    globalCallReference         (290)   OCTET_STRING,
+    calledIPInformation         (292)   IPInformationEvent
 )
 RoamingRecord           SET
 (
@@ -114,12 +132,15 @@ RoamingRecord           SET
     causeForTerm                (17)    INTEGER,
     diagnostics                 (18)    Diagnostics,
     callReference               (19)    OCTET_STRING,
+    recordExtensions           	(21)    SET_OF ManagementExtension,
+    partialRecordType			(30)    PartialRecordType,
     additionalChgInfo           (133)   AdditionalChgInfo,
     networkCallReference        (22)    OCTET_STRING,
     mscAddress                  (23)    TBCD_STRING,
     chargedParty                (141)   INTEGER,
     orgMSCId                    (168)   OCTET_STRING,
     subscriberCategory          (190)   OCTET_STRING,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
     serviceKey                  (217)   INTEGER,
     recordNumber                (232)   INTEGER,
     translatedNumber            (245)   TBCD_STRING,
@@ -143,14 +164,26 @@ TransitCallRecord       SET
     diagnostics                 (13)    Diagnostics,
     callReference               (14)    OCTET_STRING,
     sequenceNumber              (15)    INTEGER,
+    recordExtensions           	(16)    SET_OF     ManagementExtension,
+    partialRecordType			(23)    PartialRecordType,
     additionalChgInfo           (133)   AdditionalChgInfo,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
+	mscIncomingRouteAttribute   (198)   RouteAttribute,
+	mscOutgoingRouteAttribute   (199)   RouteAttribute,
     networkCallReference        (200)   OCTET_STRING,
+    setupTime                   (201)   OCTET_STRING,
+    alertingTime                (202)   OCTET_STRING,
+    voiceIndicator              (203)   VoiceIndicator,
     orgMSCId                    (168)   OCTET_STRING,
+    networkOperatorId           (223)   OCTET_STRING,
 	recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel,
     translatedNumber            (245)   TBCD_STRING,
     mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
-    globalCallReference         (290)   OCTET_STRING
+    globalCallReference         (290)   OCTET_STRING,
+    callerIPInformation         (291)   IPInformationEvent,
+    calledIPInformation         (292)   IPInformationEvent
 )
 IncGatewayRecord        SET
 (
@@ -169,15 +202,27 @@ IncGatewayRecord        SET
     diagnostics                 (12)    Diagnostics,
     callReference               (13)    OCTET_STRING,
     sequenceNumber              (14)    INTEGER,
+    recordExtensions           	(15)    SET_OF ManagementExtension,
+    partialRecordType			(22)    PartialRecordType,
     additionalChgInfo           (133)   AdditionalChgInfo,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
+	mscIncomingRouteAttribute   (198)   RouteAttribute,
+	mscOutgoingRouteAttribute   (199)   RouteAttribute,
     networkCallReference        (200)   OCTET_STRING,
+    setupTime                   (201)   OCTET_STRING,
+    alertingTime                (202)   OCTET_STRING,
     orgMSCId                    (168)   OCTET_STRING,
+    voiceIndicator              (203)   VoiceIndicator,
+    networkOperatorId           (223)   OCTET_STRING,
 	recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel,
     translatedNumber            (245)   TBCD_STRING,
     location                    (247)   LocationAreaAndCell,
     mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
-    globalCallReference         (290)   OCTET_STRING
+    globalCallReference         (290)   OCTET_STRING,
+    callerIPInformation         (291)   IPInformationEvent,
+    calledIPInformation         (292)   IPInformationEvent
 )
 OutGatewayRecord        SET
 (
@@ -194,18 +239,30 @@ OutGatewayRecord        SET
     causeForTerm                (11)    INTEGER,
     diagnostics                 (12)    Diagnostics,
     callReference               (13)    OCTET_STRING,
+    recordExtensions           	(15)    SET_OF ManagementExtension,
+    partialRecordType			(22)    PartialRecordType,
     basicService                (130)   BasicService,
     additionalChgInfo           (133)   AdditionalChgInfo,
     networkCallReference        (200)   OCTET_STRING,
     orgMSCId                    (168)   OCTET_STRING,
+    cUGOutgoingAccessIndicator  (195)   CUGOutgoingAccessIndicator,
+	mscIncomingRouteAttribute   (198)   RouteAttribute,
+	mscOutgoingRouteAttribute   (199)   RouteAttribute,
+    setupTime                   (201)   OCTET_STRING,
+    alertingTime                (202)   OCTET_STRING,
+    voiceIndicator              (203)   VoiceIndicator,
+    networkOperatorId           (223)   OCTET_STRING,
 	recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel,
     firstmccmnc                 (249)   OCTET_STRING,
     lastmccmnc                  (250)   OCTET_STRING,
     translatedNumber            (245)   TBCD_STRING,
     location                    (247)   LocationAreaAndCell,
     mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
-    globalCallReference         (290)   OCTET_STRING
+    globalCallReference         (290)   OCTET_STRING,
+    callerIPInformation         (291)   IPInformationEvent,
+    calledIPInformation         (292)   IPInformationEvent
 )
 ForwardCallRecord   SET
 (
@@ -258,6 +315,7 @@ MOSMSRecord             SET
     location                    (7)     LocationAreaAndCell,
     messageReference            (8)     OCTET_STRING,
     originationTime             (9)     OCTET_STRING,
+    recordExtensions           	(11)    SET_OF ManagementExtension,
     destinationNumber           (12)    TBCD_STRING,
     systemType                  (14)    INTEGER,
     basicService                (130)   BasicService,
@@ -271,7 +329,9 @@ MOSMSRecord             SET
     smsUserDataType             (195)   OCTET_STRING,
     smsText                     (196)    OCTET_STRING,
     callReference               (201)    OCTET_STRING,
-	recordNumber                (232)   INTEGER
+    networkOperatorId           (223)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel
 )
 MTSMSRecord              SET
 (
@@ -284,6 +344,7 @@ MTSMSRecord              SET
     recordingEntity             (6)     TBCD_STRING,
     location                    (7)     LocationAreaAndCell,
     deliveryTime                (8)     OCTET_STRING,
+    recordExtensions           	(10)    SET_OF ManagementExtension,
     systemType                  (11)    INTEGER,
     basicService                (130)   BasicService,
     additionalChgInfo           (133)   AdditionalChgInfo,
@@ -297,7 +358,9 @@ MTSMSRecord              SET
     smsText                     (196)   OCTET_STRING,
     origination                 (201)   TBCD_STRING,
     callReference               (202)   OCTET_STRING,
-	recordNumber                (232)   INTEGER
+    networkOperatorId           (223)   OCTET_STRING,
+	recordNumber                (232)   INTEGER,
+    chargeLevel                 (237)   ChargeLevel
 )
 MscIncomingROUTE        SET
 (
@@ -343,9 +406,77 @@ SuppServiceUsed         SEQUENCE
     ssTime                      (1)     OCTET_STRING,
     relatedNumber               (2)     TBCD_STRING
 )
+
 ManagementExtension             SEQUENCE
 (
-	identifier              (0)     OBJECT_IDENTIFIER,
-	information             (2)     OCTET_STRING
+    identifier                      (0)     TBCD_STRING,
+    significance                      (1)     INTEGER,	
+    information                      (2)     OCTET_STRING
 )
 
+PartialRecordType             ENUMERATED
+(
+    timeLimit                       0,
+    serviceChange                   1,
+    locationChange                  2,
+    classmarkChange                 3,
+    aocParmChange                   4,
+    radioChannelChange              5,
+    hSCSDParmChange                 6,
+    changeOfCAMELDestination        7,
+    camelCPHOperationsOnCallLegs    8,
+    secondAnswer                    9,
+    firstHotBill                   20,
+    severalSSOperationBill         21,
+    iSTalertTimeOut                22,
+    bearRedirectStart              23,
+    bearRedirectStop               24,
+    triggerDCHcontinue             25,
+    iNAPCS1Shortnumber             26,
+    roLinkFail                     27,
+    lclsactive                     28,
+    lclsdeactive                   29,
+    suspendResumeIndicator         30
+)
+
+CUGOutgoingAccessIndicator    ENUMERATED
+(
+    notCUGCall  0,
+    cUGCall     1	
+)
+
+RouteAttribute    ENUMERATED
+(
+    cas    0,
+    tup    1,
+    isup   2,
+    pra    3,
+    bicc   4,
+    sip    5,
+    others 255
+)
+
+VoiceIndicator    ENUMERATED
+(
+    sendToneByLocalMsc 0,
+    sendToneByOtherMsc 1,
+    voiceNoIndication  3
+)
+
+ChargeLevel    ENUMERATED
+(
+    chargeBySecond      0,
+    chargeBy10ms        1,
+    chargeBy100ms       2
+)
+
+IPInformationEvent SEQUENCE
+(
+    originatingIPAddress  (0) OCTET_STRING,
+    terminatingIPAddress  (1) OCTET_STRING,
+    passertedIdentity     (2) TBCD_STRING,
+    usedCodecList         (3) OCTET_STRING,
+    originatingPort       (4) INTEGER,
+    terminatingPort       (5) INTEGER,
+    qosStatistics         (6) TBCD_STRING
+)

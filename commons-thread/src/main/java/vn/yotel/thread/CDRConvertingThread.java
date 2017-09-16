@@ -2,6 +2,8 @@ package vn.yotel.thread;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -82,6 +84,13 @@ public class CDRConvertingThread extends ProcessFileThread {
 		if(exports==null){
 			throw new Exception("No column to export!!");
 		}
+		Collections.sort(exports, new Comparator<CDRColumn>(){
+			@Override
+			public int compare(CDRColumn obj1, CDRColumn obj2) {
+				return obj1.getOrder().intValue() - obj2.getOrder().intValue();
+			}
+		});
+
 		for(CDRColumn col: exports){
 			if(isFirst){
 				exportHeader +=col.getColumnName();
@@ -96,10 +105,17 @@ public class CDRConvertingThread extends ProcessFileThread {
 		// Build fixed header
 		String fixedHeader = "";
 		List<CDRColumn> fixes = conf.getFixedColumns();
+//		Arrays.sort(fixes, new Compare);
 		isFirst = true;
 		if(fixes==null){
 			throw new Exception("No column to found!!");
 		}
+		Collections.sort(fixes, new Comparator<CDRColumn>(){
+			@Override
+			public int compare(CDRColumn obj1, CDRColumn obj2) {
+				return obj1.getOrder().intValue() - obj2.getOrder().intValue();
+			}
+		});
 		for(CDRColumn col: fixes){
 			if(isFirst){
 				fixedHeader +=col.getColumnName();
