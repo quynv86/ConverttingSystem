@@ -60,7 +60,9 @@ MoCallRecord	        SET
     mscOutgoingROUTENumber      (261)   INTEGER,
     mscIncomingROUTENumber      (262)   INTEGER,
     globalCallReference         (290)   OCTET_STRING,
-    callerIPInformation         (291)   IPInformationEvent 
+    callerIPInformation         (291)   IPInformationEvent,
+    causeLocation               (295)   CauseLocation,
+    ringingDuration             (307)   INTEGER
 )
 MtCallRecord            SET
 (
@@ -113,7 +115,9 @@ MtCallRecord            SET
     mscOutgoingROUTENumber      (261)   MscOutgoingROUTENumber,
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
     globalCallReference         (290)   OCTET_STRING,
-    calledIPInformation         (292)   IPInformationEvent
+    calledIPInformation         (292)   IPInformationEvent,
+    causeLocation               (295)   CauseLocation,
+    ringingDuration             (307)   INTEGER
 )
 RoamingRecord           SET
 (
@@ -183,7 +187,8 @@ TransitCallRecord       SET
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
     globalCallReference         (290)   OCTET_STRING,
     callerIPInformation         (291)   IPInformationEvent,
-    calledIPInformation         (292)   IPInformationEvent
+    calledIPInformation         (292)   IPInformationEvent,
+    causeLocation               (295)   CauseLocation
 )
 IncGatewayRecord        SET
 (
@@ -222,7 +227,8 @@ IncGatewayRecord        SET
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
     globalCallReference         (290)   OCTET_STRING,
     callerIPInformation         (291)   IPInformationEvent,
-    calledIPInformation         (292)   IPInformationEvent
+    calledIPInformation         (292)   IPInformationEvent,
+    causeLocation               (295)   CauseLocation
 )
 OutGatewayRecord        SET
 (
@@ -262,7 +268,8 @@ OutGatewayRecord        SET
     mscIncomingROUTENumber      (262)   MscIncomingROUTENumber,
     globalCallReference         (290)   OCTET_STRING,
     callerIPInformation         (291)   IPInformationEvent,
-    calledIPInformation         (292)   IPInformationEvent
+    calledIPInformation         (292)   IPInformationEvent,
+    causeLocation               (295)   CauseLocation
 )
 ForwardCallRecord   SET
 (
@@ -479,4 +486,17 @@ IPInformationEvent SEQUENCE
     originatingPort       (4) INTEGER,
     terminatingPort       (5) INTEGER,
     qosStatistics         (6) TBCD_STRING
+)
+
+CauseLocation    ENUMERATED
+(
+    user                        0,
+    localprivatenetwork       1,
+    localnetwork               2,
+    transitnetwork             3,
+    remotelocalnetwork        4,
+    remoteprivatenetwork      5,
+    internationalnetwork       7,
+    beyondaninterworkingpoint   10,
+    unknown                        11
 )

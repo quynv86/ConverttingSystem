@@ -169,7 +169,7 @@ public class HuaweiFormat extends ASNFormat
 			mstrFieldList[mintIndexCalledNumber] = CDRBinUtil.formatCalledNumber(mstrFieldList[mintIndexCalledNumber].trim());
 
 			HashMap<String,String> onRec = new HashMap<String, String>();
-			for(int i=0;i<mstrFieldList.length;i++){
+			for(int i=0;i<fixedHeaderAsArr.length;i++){
 				// Format someting. added by quynv5
 				if(fixedHeaderAsArr[i].equalsIgnoreCase("SETUPTIME") || fixedHeaderAsArr[i].equalsIgnoreCase("ALTERTINGTIME")){
 					mstrFieldList[i] = formatDate(mstrFieldList[i]);
@@ -425,17 +425,31 @@ public class HuaweiFormat extends ASNFormat
 				"mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,releaseTime,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",null,null"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
 				+",setupTime,alertingTime"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",callerIPInformation.originatingIPAddress,callerIPInformation.terminatingIPAddress"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",null,null"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",ringingDuration"
+				+ ",'end')");
 		createCursor(
 			curMTCALL,
 			"mtCallRecord('1',"
@@ -480,17 +494,31 @@ public class HuaweiFormat extends ASNFormat
 				+ "mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,releaseTime,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",null,null"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
 				+",setupTime,alertingTime"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",null,null"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",calledIPInformation.originatingIPAddress,calledIPInformation.terminatingIPAddress"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",ringingDuration"
+				+ ",'end')");
 
 		createCursor(
 			curFWCALL,
@@ -536,16 +564,31 @@ public class HuaweiFormat extends ASNFormat
 				+ "mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,null,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",null,null"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
+				+",null,null"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",callerIPInformation.originatingIPAddress,callerIPInformation.terminatingIPAddress"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",null,null"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",null"
+				+ ",'end')");
 		createCursor(curMOSMS, "moSMSRecord('1',"
 			+ // FILE_ID
 				// TYPE,CALL_TYPE
@@ -586,18 +629,31 @@ public class HuaweiFormat extends ASNFormat
 			// 33. GLOBAL_CALL_REF, 34 releaseTime 35. recordNumber
 			// 36. Diagnostics
 			+ "null,null,null,null,null,recordNumber,null"
+			//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 			+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
-			//+",partialRecordType"
-			+",null,null"
+			// 40 : PartialRecordType
 			+",null"
-			+",null,null"
-			+",null,null"
+			// 41 :CUGOutgoingAcessIndicator
 			+",null"
+			// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
+			+",null,null"
+			// 44: SETUPTIME, 45: ALTERTINGTIME
+			+",null,null"
+			// 46: VOICEIDICATOR
+			+",null"
+			// 47: NETWORK_OPERATORID
 			+",networkOperatorId"
+			// 48: CHARGE_LEVEL
 			+",chargeLevel"
+			// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 			+",null,null"
+			// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 			+",null,null"
-			+ ")");
+			// 53: CAUSELOCATION
+			+",null"
+			// 54: RINGDURATION
+			+",null"
+			+ ",'end')");
 			
 		
 		createCursor(curMTSMS, "mtSMSRecord('1',"
@@ -639,18 +695,31 @@ public class HuaweiFormat extends ASNFormat
 			// 33. GLOBAL_CALL_REF 34. releaseTime 35. recordNumber
 			// 36. Diagnostics
 			+ "null,null,null,null,null,recordNumber,null"
+			//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 			+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
-			//+",partialRecordType"
-			+",null,null"
+			// 40 : PartialRecordType
 			+",null"
-			+",null,null"
-			+",null,null"
+			// 41 :CUGOutgoingAcessIndicator
 			+",null"
+			// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
+			+",null,null"
+			// 44: SETUPTIME, 45: ALTERTINGTIME
+			+",null,null"
+			// 46: VOICEIDICATOR
+			+",null"
+			// 47: NETWORK_OPERATORID
 			+",networkOperatorId"
+			// 48: CHARGE_LEVEL
 			+",chargeLevel"
+			// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 			+",null,null"
+			// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 			+",null,null"
-			+ ")");
+			// 53: CAUSELOCATION
+			+",null"
+			// 54: RINGDURATION
+			+",null"
+			+ ",'end')");
 		createCursor(
 			curTransitCALL,
 			"transitCallRecord('1',"
@@ -696,17 +765,31 @@ public class HuaweiFormat extends ASNFormat
 				+ "mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,releaseTime,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",mscIncomingRouteAttribute,mscOutgoingRouteAttribute"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
 				+",setupTime,alertingTime"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",callerIPInformation.originatingIPAddress,callerIPInformation.terminatingIPAddress"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",calledIPInformation.originatingIPAddress,calledIPInformation.terminatingIPAddress"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",null"
+				+ ",'end')");
 
 		createCursor(
 			curIncGatewayCALL,
@@ -753,17 +836,31 @@ public class HuaweiFormat extends ASNFormat
 				+ "mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,releaseTime,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",mscIncomingRouteAttribute,mscOutgoingRouteAttribute"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
 				+",setupTime,alertingTime"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",callerIPInformation.originatingIPAddress,callerIPInformation.terminatingIPAddress"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",calledIPInformation.originatingIPAddress,calledIPInformation.terminatingIPAddress"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",null"
+				+ ",'end')");
 
 		createCursor(
 			curOugGatewayCALL,
@@ -815,17 +912,31 @@ public class HuaweiFormat extends ASNFormat
 				+ "mscOutgoingROUTENumber,mscIncomingROUTENumber,networkCallReference,globalCallReference,releaseTime,recordNumber,"
 				// 36. Diagnostics
 				+ "diagnostics.gsm0408Cause"
+				//37: RECORD_EXENDSIONS_IDENTIFIER, 38: RECORD_EXENDSIONS_SIGNIFICANCE, 39:RECORD_EXENDSIONS_INFORMATION
 				+ ",recordExtensions.ManagementExtension.identifier,recordExtensions.ManagementExtension.significance,recordExtensions.ManagementExtension.information"
+				// 40 : PartialRecordType
 				+",partialRecordType"
+				// 41 :CUGOutgoingAcessIndicator
 				+",cUGOutgoingAccessIndicator"
+				// 42: MscIncomingRouteAttribute, 43: MscOutgoingRouteAttribute
 				+",mscIncomingRouteAttribute,mscOutgoingRouteAttribute"
+				// 44: SETUPTIME, 45: ALTERTINGTIME
 				+",setupTime,alertingTime"
+				// 46: VOICEIDICATOR
 				+",voiceIndicator"
+				// 47: NETWORK_OPERATORID
 				+",networkOperatorId"
+				// 48: CHARGE_LEVEL
 				+",chargeLevel"
+				// 49: CALLERIPINFOR_ORG_IPADDR, 50: CALLERIPINFOR_TERM_IPADDR
 				+",callerIPInformation.originatingIPAddress,callerIPInformation.terminatingIPAddress"
+				// 51: CALLEDIPINFOR_ORG_IPADDR, 52: CALLEDIPINFOR_TERM_IPADDR
 				+",calledIPInformation.originatingIPAddress,calledIPInformation.terminatingIPAddress"
-				+ ")");
+				// 53: CAUSELOCATION
+				+",causeLocation"
+				// 54: RINGDURATION
+				+",null"
+				+ ",'end')");
 	}
 
 	// //////////////////////////////////////////////////////
