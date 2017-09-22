@@ -1,5 +1,6 @@
 package vn.yotel.thread;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
 import vn.yotel.commons.exception.AppException;
+import vn.yotel.commons.util.FileUtil;
 import vn.yotel.commons.util.StringUtils;
 import vn.yotel.thread.Constants.ManageableThreadState;
 
@@ -198,7 +200,17 @@ public abstract class ManageableThread implements Runnable {
 	public boolean getParamAsBoolean(String keyVal) {
 		return this.params.getBoolean(keyVal);
 	}
-
+	
+	public void setParameter(String key, String value){
+		this.params.put(key, value);
+	}
+	public void setParameter(String key, boolean value){
+		this.params.put(key, value);
+	}
+	
+	public void persitParams(){
+		threadManager.persitParams(this);
+	}
 	public byte getState() {
 		return state;
 	}
@@ -213,6 +225,17 @@ public abstract class ManageableThread implements Runnable {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+	public String getPramsAsFolderAndCreate(String keyVal) throws AppException{
+		String folderName = getParamAsString(keyVal);
+		if(!StringUtils.nvl(folderName, "").equals("")){
+			try{
+				FileUtil.forceFolderExist(folderName);
+			}catch(IOException createEx){
+				throw new AppException("App_FILE_001","Cant create folder: " + folderName);
+			}
+		}
+		return folderName;
 	}
 	
 	/**

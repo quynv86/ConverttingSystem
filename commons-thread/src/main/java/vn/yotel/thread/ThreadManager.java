@@ -171,6 +171,7 @@ public class ThreadManager implements Runnable {
 	public synchronized ThreadConfigs loadThreadConfigs(){
 		return threadConfigLoader.loadThreadConfigs();
 	}
+
 	public void reloadThreadParams(String threadId) throws Exception{
 		synchronized(this){
 			ThreadConfig threadConfig = threadConfigLoader.findOne(threadId);
@@ -189,5 +190,12 @@ public class ThreadManager implements Runnable {
 	
 	protected void logThread(ManageableThread thread, int level, String logMsg){
 		threadLogger.log(thread, level, logMsg);
+	}
+
+	// Persit parameter to database
+	public void persitParams(ManageableThread thread){
+		ThreadConfig threadConfig = threadConfigLoader.findOne(thread.getId());
+		threadConfig.setParams(thread.getParams());
+		threadConfigLoader.update(threadConfig);
 	}
 }
